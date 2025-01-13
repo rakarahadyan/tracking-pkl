@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity, StyleSheet, ActivityIndicator, View } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginScreen from './src/user/auth/login';
+import dashboardScreen from './src/user/dashboard/index';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +13,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName={'Login'}>
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Dashboard" component={dashboardScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

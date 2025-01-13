@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -73,11 +73,31 @@ const UserScreen = () => (
 );
 
 
-const ChatScreen = () => (
-  <View style={styles.container}>
-    <Text>Chat Screen</Text>
-  </View>
-);
+const ChatScreen = () => {
+    // Sample chat data
+    const chatData = [
+      { id: '1', sender: 'User1', message: 'Hello, how are you?' },
+      { id: '2', sender: 'User2', message: 'I am good, thanks! How about you?' },
+      { id: '3', sender: 'User1', message: 'I am doing great!' },
+      { id: '4', sender: 'User2', message: 'Glad to hear that!' },
+      { id: '5', sender: 'User1', message: 'What are you up to today?' },
+    ];
+  
+    return (
+      <View style={styles.container}>
+        <FlatList
+          data={chatData}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.messageContainer}>
+              <Text style={styles.sender}>{item.sender}:</Text>
+              <Text style={styles.message}>{item.message}</Text>
+            </View>
+          )}
+        />
+      </View>
+    );
+  };
 
 const Dashboard = () => {
     return (
@@ -105,7 +125,7 @@ const Dashboard = () => {
           component={ChatScreen}
           options={{
             title: 'Chat',
-            headerTitle: 'Chat',
+            headerTitle: 'Chat Pedagang',
           }}
         />
         <Tab.Screen
@@ -175,7 +195,38 @@ const styles = StyleSheet.create({
   mostSearchText: {
     fontSize: 13,
     color: '#fff',
-  }
+  },
+  messageContainer: {
+    marginBottom: 10,
+    flexDirection: 'row', // Align the avatar and text in a row
+  },
+  messageBox: {
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    padding: 10,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,  // For Android shadow
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10, // Space between avatar and message text
+  },
+  textContainer: {
+    flex: 1,
+  },
+  sender: {
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  message: {
+    color: '#555',
+  },
 });
 
 export default Dashboard;

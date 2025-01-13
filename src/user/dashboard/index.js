@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -9,54 +9,59 @@ const TrackScreen = () => {
   const [foodValue, setFoodValue] = useState('');
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.trackTitle}>Hallo Pelanggan</Text>
-      <Text style={styles.trackSubTitle}>Mau makan apa hari ini?</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
+        <View>
+        <Text style={styles.trackTitle}>Hallo Pelanggan</Text>
+        <Text style={styles.trackSubTitle}>Mau makan apa hari ini?</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Cari Makanan"
-        value={foodValue}
-        onChangeText={setFoodValue}
-        autoCorrect={false}
-        autoCapitalize="none"
-      />
+        <TextInput
+            style={styles.input}
+            placeholder="Cari Makanan"
+            value={foodValue}
+            onChangeText={setFoodValue}
+            autoCorrect={false}
+            autoCapitalize="none"
+        />
 
-      <Text style={styles.mostSearch} > Paling Banyak Dicari</Text>
+        <Text style={styles.mostSearch} > Paling Banyak Dicari</Text>
 
-      <View style={styles.mostSearchContainer}>
+        <View style={styles.mostSearchContainer}>
 
-        <View style={styles.mostSearchItem}>
-          <Text style={styles.mostSearchText}>Ayam Goreng</Text>
+            <View style={styles.mostSearchItem}>
+            <Text style={styles.mostSearchText}>Ayam Goreng</Text>
+            </View>
+
+            <View style={styles.mostSearchItem}>
+            <Text style={styles.mostSearchText}>Nasi Goreng</Text>
+            </View>
+
+            <View style={styles.mostSearchItem}>
+            <Text style={styles.mostSearchText}>Bakso</Text>
+            </View>
+
+            <View style={styles.mostSearchItem}>
+            <Text style={styles.mostSearchText}>Mie Ayam</Text>
+            </View>
+
+            <View style={styles.mostSearchItem}>
+            <Text style={styles.mostSearchText}>Soto</Text>
+            </View>
+
+            <View style={styles.mostSearchItem}>
+            <Text style={styles.mostSearchText}>Mie Goreng</Text>
+            </View>
+
+            <View style={styles.mostSearchItem}>
+            <Text style={styles.mostSearchText}>Nasi Uduk</Text>
+            </View>
+
         </View>
 
-        <View style={styles.mostSearchItem}>
-          <Text style={styles.mostSearchText}>Nasi Goreng</Text>
         </View>
-
-        <View style={styles.mostSearchItem}>
-          <Text style={styles.mostSearchText}>Bakso</Text>
-        </View>
-
-        <View style={styles.mostSearchItem}>
-          <Text style={styles.mostSearchText}>Mie Ayam</Text>
-        </View>
-
-        <View style={styles.mostSearchItem}>
-          <Text style={styles.mostSearchText}>Soto</Text>
-        </View>
-
-        <View style={styles.mostSearchItem}>
-          <Text style={styles.mostSearchText}>Mie Goreng</Text>
-        </View>
-
-        <View style={styles.mostSearchItem}>
-          <Text style={styles.mostSearchText}>Nasi Uduk</Text>
-        </View>
-
-      </View>
-
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -84,7 +89,7 @@ const Dashboard = () => {
             if (route.name === 'Chat') {
               iconName = focused ? 'comments' : 'comments-o';
             } else if (route.name === 'Track') {
-              iconName = focused ? 'map-marker' : 'map-marker';
+              iconName = focused ? 'map' : 'map';
             } else if (route.name === 'User') {
               iconName = focused ? 'user-circle' : 'user-circle-o';
             }
@@ -135,17 +140,20 @@ const styles = StyleSheet.create({
   trackTitle: {
     fontSize: 24,
     fontWeight: 'bold',
+    alignSelf: 'center',
   },
   trackSubTitle: {
     fontSize: 18,
     marginBottom: 20,
+    alignSelf: 'center',
   },
   input: {
     height: 35,
-    width: '100%',
+    width: 300,
     borderRadius: 50,
     backgroundColor: '#EDEDED',
     padding: 20,
+    alignSelf: 'center',
   },
   mostSearch: {
     fontSize: 18,

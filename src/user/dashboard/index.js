@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import ChatScreen from './chat/index';
 
 const Tab = createBottomTabNavigator();
 
@@ -71,33 +72,6 @@ const UserScreen = () => (
     <Text>User Screen</Text>
   </View>
 );
-
-
-const ChatScreen = () => {
-    // Sample chat data
-    const chatData = [
-      { id: '1', sender: 'User1', message: 'Hello, how are you?' },
-      { id: '2', sender: 'User2', message: 'I am good, thanks! How about you?' },
-      { id: '3', sender: 'User1', message: 'I am doing great!' },
-      { id: '4', sender: 'User2', message: 'Glad to hear that!' },
-      { id: '5', sender: 'User1', message: 'What are you up to today?' },
-    ];
-  
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={chatData}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.messageContainer}>
-              <Text style={styles.sender}>{item.sender}:</Text>
-              <Text style={styles.message}>{item.message}</Text>
-            </View>
-          )}
-        />
-      </View>
-    );
-  };
 
 const Dashboard = () => {
     return (

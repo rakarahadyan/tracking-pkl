@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity, StyleSheet, ActivityIndicator, View } from 'react-native';
 import LoginScreen from './src/user/auth/login';
-import dashboardScreen from './src/user/dashboard/index';
+import DashboardScreen from './src/user/dashboard/index';
+import DetailChat from './src/user/dashboard/chat/detail_chat';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +14,8 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName={'Login'}>
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Dashboard" component={dashboardScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Dashboard" component={DashboardScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="DetailChat" component={DetailChat} />
       </Stack.Navigator>
     </NavigationContainer>
   );

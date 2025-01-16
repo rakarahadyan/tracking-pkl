@@ -3,10 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import ChatScreen from './chat/index';
+import { Button } from '@rneui/themed';
 
 const Tab = createBottomTabNavigator();
 
-const TrackScreen = () => {
+const TrackScreen = ({ navigation }) => {
   const [foodValue, setFoodValue] = useState('');
 
   return (
@@ -17,15 +18,21 @@ const TrackScreen = () => {
         <View>
         <Text style={styles.trackTitle}>Hallo Pelanggan</Text>
         <Text style={styles.trackSubTitle}>Mau makan apa hari ini?</Text>
+        
+        <View style={styles.searchContainer} > 
+          <TextInput
+              style={styles.input}
+              placeholder="Cari Makanan"
+              value={foodValue}
+              onChangeText={setFoodValue}
+              autoCorrect={false}
+              autoCapitalize="none"
+          />
 
-        <TextInput
-            style={styles.input}
-            placeholder="Cari Makanan"
-            value={foodValue}
-            onChangeText={setFoodValue}
-            autoCorrect={false}
-            autoCapitalize="none"
-        />
+          <FontAwesome name="search" size={24} color="black" onPress={() => { navigation.navigate('Map', { food: foodValue }); }} />
+
+        </View>
+
 
         <Text style={styles.mostSearch} > Paling Banyak Dicari</Text>
 
@@ -67,9 +74,9 @@ const TrackScreen = () => {
 };
 
 
-const UserScreen = () => (
+const UserScreen = ({ navigation}) => (
   <View style={styles.container}>
-    <Text>User Screen</Text>
+    <Button title="Logout" onPress={() => { navigation.navigate('Login'); }} />
   </View>
 );
 
@@ -142,12 +149,19 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   input: {
-    height: 35,
+    height: 60,
     width: 300,
     borderRadius: 50,
     backgroundColor: '#EDEDED',
     padding: 20,
     alignSelf: 'center',
+    color: '#000'
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+    gap: 10
   },
   mostSearch: {
     fontSize: 18,

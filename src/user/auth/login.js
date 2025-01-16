@@ -4,8 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState('example@gmail.com');
-  const [password, setPassword] = useState('1234');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
@@ -20,12 +20,14 @@ export default function LoginScreen({ navigation }) {
       return;
     }
 
-    if (email === 'example@gmail.com' && password === '1234') {
+    if (email === 'user@gmail.com' && password === '1234') {
 
-        await AsyncStorage.setItem('email', email);
-        await AsyncStorage.setItem('password', password);
+        // await AsyncStorage.setItem('email', email);
+        // await AsyncStorage.setItem('password', password);
         navigation.replace('Dashboard');
 
+    } else {
+      Alert.alert('Error', 'Email atau password salah.');
     }
 
   };
@@ -64,7 +66,7 @@ export default function LoginScreen({ navigation }) {
         </View>
 
         <View style={styles.buttonView}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('Register')} >
             
             <Text style={[styles.buttonText, { color: '#FFA135' }]}>Daftar</Text>
           </TouchableOpacity>
